@@ -1,0 +1,28 @@
+[user]
+	name = Wei Zhang
+	email = veeamd@gmail.com
+[push]
+	default = simple
+[core]
+	excludesfile = /Users/weiz/.gitignore_global
+	editor = vim
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[merge]
+	tool = opendiff
+[alias]
+	last = log -1 HEAD
+	oneline = log --graph --pretty=format:'%Cred%h%Creset -%C(bold yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	sts = status -s
+	unstage = reset HEAD --
+	discard = checkout --
+[rerere]
+	enabled = true

@@ -9,25 +9,22 @@ build/
 *.tmp
 *.xccheckout
 *.xcscmblueprint
-*.ipa
-*.mobileprovision
-
-# Fastlane
 fastlane/report.xml
-fastlane/test_output
-
 # Carthage
+#
+# Add this line if you want to avoid checking in source code from Carthage dependencies.
 Carthage/Checkouts
 Carthage/Build
 Carthage
+fastlane/test_output
 *.zip
-
-*.framework
+*.ipa
+*.mobileprovision
+.swiftlint.yml
 
 # npm
-package-lock.json
 node_modules
 
 # ctags
-.ctags
 tags
+.ctags
