@@ -5,6 +5,19 @@ set nocompatible
 " `updatetime` shorter
 set updatetime=100
 
+" Display trailing white spaces
+set list        
+set listchars=trail:·,tab:>-
+
+" Automatically remove trailing white spaces on saving
+function! StripTrailingWhitespace()
+  mark a
+  %s/\s\+$//e
+  'a
+endfunction
+
+autocmd BufWritePre *.h,*.m,*.swift,*.rb,*.yml,*.js,*.jsx,*.css,*.less,*.sass,*.scss,*.html,*.xml,*.erb,*.haml,*.sh,Dockerfile*,*.rake call StripTrailingWhitespace()
+
 " Seems that we need put this line after we add a color scheme
 " let g:gruvbox_italic=1
 set termguicolors
@@ -42,7 +55,7 @@ let g:ctrlp_custom_ignore = {
   \ 'link': 'some_bad_symbolic_links',
   \ }
 
-" "" NerdTree
+" NerdTree
 nnoremap <C-n> :NERDTreeToggle<CR>
 " Searching
 set hlsearch                    " highlight matches
