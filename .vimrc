@@ -1,6 +1,10 @@
 set nu
 set nocompatible
 
+" To make the gitgutter markers appear faster, we need to make vim's
+" `updatetime` shorter
+set updatetime=100
+
 " Seems that we need put this line after we add a color scheme
 " let g:gruvbox_italic=1
 set termguicolors
