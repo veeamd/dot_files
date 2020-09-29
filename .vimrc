@@ -66,7 +66,7 @@ set encoding=utf-8
 set showcmd                     " display incomplete commands
 
 "" Whitespace
-set nowrap                      " don't wrap lines
+set wrap
 set backspace=indent,eol,start  " backspace through everything in insert mode
 set softtabstop=4 shiftwidth=4 expandtab " a tab is four spaces, expandtab is to use spaces not tabs 
 
@@ -78,7 +78,7 @@ au BufRead,BufNewFile ~/Dev/iOS/StreetEasy/StreetEasy/*.m setlocal tags=~/Dev/iO
 au BufRead,BufNewFile *.swift,*.h,*.m set tags+=~/.global-objc-tags
 au BufRead,BufNewFile *.swift,*.h,*.m set tags+=~/.streeteasy-tags
 
-" config the swift language server protocol	
+" config the swift language server protocol with vim-lsp	
 "if executable('sourcekit-lsp')
 "    autocmd User lsp_setup call lsp#register_server({
 "        \ 'name': 'sourcekit-lsp',
@@ -86,9 +86,28 @@ au BufRead,BufNewFile *.swift,*.h,*.m set tags+=~/.streeteasy-tags
 "        \ 'whitelist': ['swift'],
 "        \ })
 "endif
-"
-"" use LSP for omnicompletion
-"autocmd FileType swift setlocal omnifunc=lsp#complete
+""
+""" use LSP for omnicompletion
+"function! s:on_lsp_buffer_enabled() abort
+"    setlocal omnifunc=lsp#complete
+"    setlocal signcolumn=yes
+"    nmap <buffer> gd <plug>(lsp-definition)
+""    nmap <buffer> <f2> <plug>(lsp-rename)
+"    " refer to doc to add more commands
+"endfunction
+""
+"augroup lsp_install
+"    au!
+"    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+"    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+"augroup END
+""
+"" debugging lsp
+"let g:lsp_log_verbose = 1
+"let g:lsp_log_file = expand('~/vim-lsp.log')
+""
+"" for asyncomplete.vim log
+"let g:asyncomplete_log_file = expand('~/asyncomplete.log')
 
 set ttymouse=xterm2
 

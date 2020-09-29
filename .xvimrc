@@ -1,4 +1,5 @@
 set ignorecase
+set relativenumber
 
 " Maps escape to jj and jk so you don't ever have to actually hit that pesky
 " escape key to get out of insert mode. Feel free to switch this with another
