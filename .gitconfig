@@ -25,6 +25,8 @@
 	unstage = reset HEAD --
 	discard = checkout --
 [rerere]
-	enabled = true
-[url "git@github.com:"]
-	insteadOf = https://github.com/
+	enabled = false
+[credential]
+	helper = osxkeychain
+[pull]
+	rebase = false
