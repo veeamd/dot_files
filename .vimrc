@@ -18,6 +18,12 @@ endfunction
 
 autocmd BufWritePre *.h,*.m,*.swift,*.rb,*.yml,*.js,*.jsx,*.css,*.less,*.sass,*.scss,*.html,*.xml,*.erb,*.haml,*.sh,Dockerfile*,*.rake call StripTrailingWhitespace()
 
+" We are manually installing plugins
+" Here is how to do it
+" `mkdir -p ~/.vim/pack/default/start` 
+" `cd ~/.vim/pack/default/start`
+" `git clone https://github.com/morhetz/gruvbox.git`
+
 " Seems that we need put this line after we add a color scheme
 " let g:gruvbox_italic=1
 set termguicolors
@@ -28,35 +34,6 @@ syntax on
 "" Airline
 let g:airline_theme='dark'
 
-"" Ack
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
-
-"" CtrlP
-" Change the default mapping and the default command to invoke CtrlP 
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-" When invoked without an explicit starting directory, CtrlP will set its local working directory according to this variable:
-" 'r' - the nearest ancestor of the current file that contains one of these directories or files: .git .hg .svn .bzr _darcs
-" 'a' - the directory of the current file, unless it is a subdirectory of the cwd
-" 'c' - the directory of the current file.
-" 'w' - modifier to "r": start search from the cwd instead of the current file's directory
-" 0 or '' (empty string) - disable this feature.
-let g:ctrlp_working_path_mode = 'ra'
-" If a file is already open, open it again in a new pane instead of switching to the existing pane
-let g:ctrlp_switch_buffer = 'et'
-" Exclude files and directories using Vim's wildignore and CtrlP's own g:ctrlp_custom_ignore. If a custom listing command is being used, exclusions are ignored:
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-
-" NerdTree
-nnoremap <C-n> :NERDTreeToggle<CR>
 " Searching
 set hlsearch                    " highlight matches
 set incsearch                   " incremental searching
@@ -70,63 +47,10 @@ set wrap
 set backspace=indent,eol,start  " backspace through everything in insert mode
 set softtabstop=4 shiftwidth=4 expandtab " a tab is four spaces, expandtab is to use spaces not tabs 
 
-" test autocommands
-" can I use ** to include recursively all the subfolders?
-au BufRead,BufNewFile ~/Dev/iOS/StreetEasy/StreetEasy/*.swift setlocal tags=~/Dev/iOS/StreetEasy/StreetEasy/tags
-au BufRead,BufNewFile ~/Dev/iOS/StreetEasy/StreetEasy/*.h setlocal tags=~/Dev/iOS/StreetEasy/StreetEasy/tags
-au BufRead,BufNewFile ~/Dev/iOS/StreetEasy/StreetEasy/*.m setlocal tags=~/Dev/iOS/StreetEasy/StreetEasy/tags
-au BufRead,BufNewFile *.swift,*.h,*.m set tags+=~/.global-objc-tags
-au BufRead,BufNewFile *.swift,*.h,*.m set tags+=~/.streeteasy-tags
-
-" config the swift language server protocol with vim-lsp	
-"if executable('sourcekit-lsp')
-"    autocmd User lsp_setup call lsp#register_server({
-"        \ 'name': 'sourcekit-lsp',
-"        \ 'cmd': {server_info->['sourcekit-lsp']},
-"        \ 'whitelist': ['swift'],
-"        \ })
-"endif
-""
-""" use LSP for omnicompletion
-"function! s:on_lsp_buffer_enabled() abort
-"    setlocal omnifunc=lsp#complete
-"    setlocal signcolumn=yes
-"    nmap <buffer> gd <plug>(lsp-definition)
-""    nmap <buffer> <f2> <plug>(lsp-rename)
-"    " refer to doc to add more commands
-"endfunction
-""
-"augroup lsp_install
-"    au!
-"    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
-"    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-"augroup END
-""
-"" debugging lsp
-"let g:lsp_log_verbose = 1
-"let g:lsp_log_file = expand('~/vim-lsp.log')
-""
-"" for asyncomplete.vim log
-"let g:asyncomplete_log_file = expand('~/asyncomplete.log')
-
-set ttymouse=xterm2
+set mouse=a
 
 " Config Markdown syntax
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-
-" Plugins that I know I want
-"  fugitive
-"  surround
-"  call dein#add('ryanoasis/vim-devicons')
-"  call dein#add('vim-syntastic/syntastic')
-
-" Potential plugins
-"
-"  " language server protocol
-"  "call dein#add('prabirshrestha/async.vim')
-"  "call dein#add('prabirshrestha/vim-lsp')
-"
-"
 
 " line numbers
 :set number relativenumber
@@ -136,3 +60,25 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 :  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
 :  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 :augroup END
+
+" Use a line cursor within insert mode and a block cursor everywhere else.
+"
+" Using iTerm2? Go-to preferences / profile / colors and disable the smart bar
+" cursor color. Then pick a cursor and highlight color that matches your theme.
+" That will ensure your cursor is always visible within insert mode.
+"
+" Reference chart of values:
+"   Ps = 0  -> blinking block.
+"   Ps = 1  -> blinking block (default).
+"   Ps = 2  -> steady block.
+"   Ps = 3  -> blinking underline.
+"   Ps = 4  -> steady underline.
+"   Ps = 5  -> blinking bar (xterm).
+"   Ps = 6  -> steady bar (xterm).
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
+" workaround for delays when switching between insert and normal mode
+set ttimeout
+set ttimeoutlen=1
+set ttyfast
