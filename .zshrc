@@ -49,4 +49,4 @@ alias ssh="colorssh"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-source ~/dot_files/aliases.sh
+source ~/aliases.sh # remember to make an alias first for the .sh file: ln -s /Volume/code/dot_files/aliases.sh .aliases.sh
