@@ -7,7 +7,7 @@ run `./git-config`
 
 cd to home folder, run the following:
 
-`ln -s dot_files/.vimrc .vimrc`
+`ln -s dot_files/.vimrc .vimrc` # remember to change the source file path
 
 We are manually installing plugins
 
